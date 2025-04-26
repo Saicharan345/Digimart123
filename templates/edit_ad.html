@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Ad - Digimart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f9f9f9;
+            margin: 0;
+            padding: 40px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea,
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            margin-top: 6px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .current-img {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .current-img img {
+            max-width: 200px;
+            border-radius: 8px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            margin-top: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    {% extends "base.html" %}
+
+    {% block content %}
+    <div class="container">
+        <h2>Edit Your Ad</h2>
+        <form method="POST" enctype="multipart/form-data">
+            <label for="item_name">Item Name:</label>
+            <input type="text" name="item_name" id="item_name" value="{{ ad[0] }}" required>
+
+            <label for="price">Price:</label>
+            <input type="number" name="price" id="price" step="0.01" value="{{ ad[1] }}" required>
+
+            <label for="description">Description:</label>
+            <textarea name="description" id="description" required>{{ ad[2] }}</textarea>
+
+            <label for="image">Upload New Image (optional):</label>
+            <input type="file" name="image" id="image" accept="image/*">
+
+            <div class="current-img">
+                <p>Current Image:</p>
+                <img src="{{ url_for('static', filename='uploads/' + ad[3]) }}" alt="Current Ad Image">
+            </div>
+
+            <button type="submit">Save Changes</button>
+        </form>
+        <a class="back-link" href="{{ url_for('edit_orders') }}">← Back to Edit Orders</a>
+    </div>
+    {% endblock %}
+</body>
+</html>

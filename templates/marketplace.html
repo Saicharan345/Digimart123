@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Marketplace</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #4CAF50;
+            color: white;
+            padding: 1em 2em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        .nav-buttons a {
+            margin-left: 15px;
+            text-decoration: none;
+            background: white;
+            color: #4CAF50;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        .container {
+            padding: 30px;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .card img {
+            width: 140px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .details {
+            flex-grow: 1;
+        }
+        .details h3 {
+            margin: 0 0 10px;
+        }
+        .details p {
+            margin: 5px 0;
+        }
+        .username {
+            font-size: 0.9em;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome, {{ username }} 👋</h1>
+        <div class="nav-buttons">
+            <a href="{{ url_for('marketplace') }}">Market</a>
+            <a href="{{ url_for('your_orders') }}">Your Orders</a>
+            <a href="{{ url_for('create_order') }}">Create Order</a>
+            <a href="{{ url_for('edit_orders') }}">Edit Orders</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </header>
+
+    <div class="container">
+        {% for ad in ads %}
+            <div class="card">
+                <img src="{{ url_for('static', filename='uploads/' + ad[3]) }}" alt="Item Image">
+                <div class="details">
+                    <h3>{{ ad[1] }}</h3>
+                    <p><strong>Price:</strong> ${{ ad[2] }}</p>
+                    <p>{{ ad[4] }}</p>
+                    <p class="username">Posted by {{ ad[5] }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</body>
+</html>

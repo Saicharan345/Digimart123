@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Digimart</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <!-- Fixed Navbar -->
+    <header>
+        <h1>Welcome, {{ username }} 👋</h1>
+        <div class="nav-buttons">
+            <a href="{{ url_for('marketplace') }}">Market</a>
+            <a href="{{ url_for('your_orders') }}">Your Orders</a>
+            <a href="{{ url_for('create_order') }}">Create Order</a>
+            <a href="{{ url_for('edit_orders') }}">Edit Orders</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </header>
+
+    <!-- Dynamic Page Content -->
+    <div class="main-content">
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
